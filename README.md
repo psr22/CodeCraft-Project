@@ -1,2 +1,2 @@
-# CodeCraft-Project
+# CodeCraft Project
 Project under Biosoc, IITK
