@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const ll MIN = -(1e9); 
+
+int main() {
+    ll n, ans = MIN, sum = MIN;
+    cin >> n;
+    ll ar[n];
+
+    for (ll i = 0; i < n; i ++) {
+        cin >> ar[i];
+        // do we want to add ar[i] to the exisiting subarray
+        // OR start a new subarray from ar[i], tracked by sum
+
+        sum = max (ar[i], sum + ar[i]);    
+        ans = max (ans, sum);   // keeps track of overall max val     
+    }
+    cout << ans;
+    return 0;
+}

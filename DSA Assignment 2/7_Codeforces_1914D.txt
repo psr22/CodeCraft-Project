@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    ll t, n, x;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        
+        ll ans = 0;
+        // store values in {no of friends, ith day} pair
+        vector <pair <ll, ll>> a, b, c;
+
+        for (ll i = 0; i < n; i ++) {
+            cin >> x;
+            a.push_back ({ x, i });     
+        }
+        for (ll i = 0; i < n; i ++) {
+            cin >> x;
+            b.push_back ({ x, i });
+        }
+        for (ll i = 0; i < n; i ++) {
+            cin >> x;
+            c.push_back ({ x, i });
+        }
+        sort (a.begin (), a.end ());
+        sort (b.begin (), b.end ());
+        sort (c.begin (), c.end ());
+
+        // we only consider 3 highest values for each activity
+        // this is sufficient as there are 3 diff days required
+
+        for (ll i = n - 1; i >= n - 3; i --) {
+            ll i1 = a[i].second;    // day of skiing
+
+            for (ll j = n - 1; j >= n - 3; j --) {
+                ll i2 = b[j].second;    // day of movies
+
+                for (ll k = n - 1; k >= n - 3; k --) {
+                    ll i3 = c[k].second;    // day of board games
+
+                    if (i1 != i2 && i2 != i3 && i3 != i1)
+                        ans = max (ans, a[i].first + b[j].first + c[k].first);
+                }
+            }   // we check for whether they are on diff days
+        }   // then we assign the max value to ans
+        cout << ans << "\n";
+    }
+    return 0;
+}

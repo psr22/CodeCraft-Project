@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int solve (int A, int B, int C) {
+    // (A, B, C), (A, C, B) & (B, C, A), (C, B, A) 
+    // in these cases common dist is between start and middle point
+    
+    if (A >= max (B, C) || A <= min (B, C))
+        return min (abs (A - B), abs (A - C));
+    return 0;       // else common dist = 0, as B, C split up
+}
+int main() {
+    int t, xA, yA, xB, yB, xC, yC;
+    cin >> t;
+    while (t--) {
+        cin >> xA >> yA >> xB >> yB >> xC >> yC;
+        int ans = 0;
+        
+        // we add the common dist separately for x, y coordinates
+        ans += solve (xA, xB, xC);  
+        ans += solve (yA, yB, yC);
+        cout << (++ ans) << "\n";   // add 1 due to cells
+    }
+    return 0;
+}

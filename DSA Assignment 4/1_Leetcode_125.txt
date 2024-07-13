@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int p1 = 0, p2 = s.size() - 1;      // 2 pointer approach
+
+        while (p1 < p2) {
+            while (!isalnum (s[p1]) && p1 < p2)     // to check for spaces, special chars
+                p1 ++;
+            while (!isalnum (s[p2]) && p1 < p2)     // same as above
+                p2 --;
+            if (tolower (s[p1]) != tolower (s[p2]))     
+                return false;       // char equal dist from ends must match
+            p1 ++;
+            p2 --;
+        }
+        return true;    // chars equal dist from ends match, so phrase is Palindrome
+    }
+};

@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define MAX 1e7
+ 
+int main() {
+    int t, n, m;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        
+        map <string, int> mp;
+        mp["01"] = mp["10"] = mp["00"] = mp["11"] = MAX;
+        // initial value very large so that does not affect min
+            
+        while (n--) {
+            string s;
+            cin >> m >> s;
+            mp[s] = min (m, mp[s]);     
+            // storing only the min minutes for each skill
+        }
+        int x = mp["10"] + mp["01"];    // as 10 + 01 = 11
+        int y = mp["11"];
+        
+        // no set of books gives us the skills we need
+        if (min (x, y) == MAX)      
+            cout << -1 << "\n";
+        else
+            cout << min (x, y) << "\n";
+    }
+    return 0;
+}

@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+bool check (int n, int m) {
+    if (n == m)     // trivial
+        return true;
+    if (n % 3 != 0)    // no more piles can be formed 
+        return false;
+
+    return (check (n / 3, m) || check (2*n / 3, m)); 
+    // we recursively check with the 2 piles formed from n
+}
+int main() {
+    int t, n, m;
+    cin >> t;
+
+    while (t--) {     
+        cin >> n >> m;
+        if (check (n, m))   // it is possible to form m piles
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    }
+    return 0;
+}

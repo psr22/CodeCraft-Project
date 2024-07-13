@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main() { 
+    ll n, a, d, f = 0, reward = 0;
+    cin >> n;
+    vector <pair <ll, ll>> v;
+
+    while (n--) {
+        cin >> a >> d;
+        v.push_back ({a, d});   // {duration, deadline} pair   
+    }
+    sort (v.begin(), v.end());
+    // sorting as per duration values, greedy approach
+
+    for (auto it : v) {
+        reward += it.second - (it.first + f);   
+        f += it.first;     // adding duration to total time
+    }
+    cout << reward;     // calculate & print reward as per ques
+    return 0;
+}

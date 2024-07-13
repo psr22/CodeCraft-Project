@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    ll t = 1, n, h;
+    cin >> t;
+    while (t --) {      // binary search for the min val of k
+        cin >> n >> h;
+
+        vector <ll> v(n);
+        for (auto &it : v)
+            cin >> it;
+
+        ll low = 1, high = 1e18;
+        while (low <= high) {
+            ll mid = low + (high - low) / 2, sum = 0;
+
+            // check whether dmg = mid or lesser due to effect re - applied
+            // at the end, apply 'mid' amt of dmg as no hit done afterwards
+
+            for (int i = 1; i < n; i ++)
+                sum += min (v[i] - v[i - 1], mid);     
+            sum += mid;         // dmg = mid at the end 
+    
+            if (sum < h)    // we need to check for higher val of k
+                low = mid + 1;
+            else        // we can check for lower val to find min k
+                high = mid - 1;
+        }
+        cout << low << "\n";
+    }
+    return 0;
+}

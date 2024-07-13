@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    int t, n;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> n >> s;
+        int count = 0;      // length of char added
+        
+        auto i1 = s.begin(), i2 = (-- s.end());
+        // iterators pointing to first and last char of str
+        // 2 pointer approach
+        
+        while (i1 < i2) {
+            // either a '10' or a '01' set was added at the ends
+            if ((*i1 == '0' && *i2 == '1') || (*i1 == '1' && *i2 == '0')) {
+                count += 2;
+                i1 ++;
+                i2 --;
+            }
+            else    // this means we have reached the original str 
+                break;
+        }   // len of original str
+        cout << (n - count) << "\n";    
+    }
+    return 0;
+}

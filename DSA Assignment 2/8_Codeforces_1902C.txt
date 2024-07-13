@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const ll MIN = -(1e10);
+
+int main() {
+    ll t, n, a;
+    cin >> t;
+    
+    while (t--) {
+        cin >> n;
+        ll g = 0, x = MIN, ans = 0;
+        vector <ll> v;
+
+        for (ll i = 0; i < n; i ++) {
+            cin >> a;
+            v.push_back (a);
+        }
+        if (n == 1) {       // special case when single element
+            cout << 1 << "\n";
+            continue;
+        }
+        sort (v.begin (), v.end ());
+        // we will calculate gcd of diff of elements with the max value
+
+        for (ll i = 0; i < n - 1; i ++) 
+            g = __gcd (g, v[n - 1] - v[i]);
+        
+        g = max (g, 1ll);        // to ensure gcd != 0
+        ll val = v[n - 1] - g;      
+        // to check which val x can take to minimise ans
+
+        for (ll i = n - 2; i >= 0; i --) {
+            if (val != v[i]) {
+                x = val;        // we found a suitable val for x
+                break;
+            }
+            else        // we decrement val and search again
+                val -= g;
+        }
+        if (x == MIN)       // if no val of x was found in vector
+            x = v[n - 1] + g;
+        // ans would only increase by 1 due to this
+
+        ll largest = max (v[n - 1], x), sum = 0;
+        for (auto it : v)
+            sum += it;      // sum of all elements 
+
+        // we have to include n + 1 as new element was added
+        ans += (largest * (n+1) - sum - x) / g;
+        cout << ans << "\n"; 
+    }
+    return 0;
+}

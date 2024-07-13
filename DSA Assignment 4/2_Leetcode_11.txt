@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int l = 0, r = height.size() - 1, ans = 0;      // 2 pointers
+        while (l < r) {
+            ans = max (ans, (r - l) * min( height[l], height[r] ));     // calculate amt as per ques    
+
+            if (height[l] < height[r])      // if we move right height, amt decreases
+                l ++;
+            else if (height[l] > height[r])     // similar logic
+                r --;
+            else {      // if both heights equal
+                l ++;   // to find new max we will have to move both anyway
+                r --;
+            }
+        }   // greedy, 2 pointer approach of choosing heights
+        return ans;
+    }
+};

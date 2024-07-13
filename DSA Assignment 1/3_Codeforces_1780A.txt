@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    int t, n, a;
+    cin >> t;
+    
+    while (t--) {
+        cin >> n;
+        vector <pair <int, int>> odd, even;
+	// we store odd, even no in diff vectors, along with their indices
+        
+	for (int i=0; i<n; i++) {
+            cin >> a;
+            if (a % 2 == 0)
+                even.push_back ({a, i+1});
+            else
+                odd.push_back ({a, i+1});
+        }
+	// odd + even = odd (only case)
+	// odd + odd = even & even + even = even
+	// so we need at least (3 odd) or (1 odd, 2 even) no
+
+        if (odd.size() >= 3 || (odd.size() >= 1 && even.size() >= 2)) {
+            cout << "YES\n";
+
+            if (odd.size() >= 3) 
+                cout << odd[0].second << " " << odd[1].second << " " << odd[2].second << "\n";
+            else 
+                cout << odd[0].second << " " << even[0].second << " " << even[1].second << "\n";
+        }
+        else
+            cout << "NO\n";
+    }
+    return 0;
+}

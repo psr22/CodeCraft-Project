@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+int main() {
+    int t, b, n;
+    cin >> t;
+
+    while (t--) {
+        string str, ans = "";
+        cin >> n >> str;
+
+        set <char> s;       
+        // distinct char in str, sorted alphabetically
+        map <char, char> mp;
+        // mapping of {char : char} for replacing them
+
+        for (char i : str)
+            s.insert (i);   
+        auto i1 = s.begin(), i2 = (--s.end());
+        
+        while (i1 != s.end()) {
+            mp[*i1] = *i2;      // obtaining the mapping
+            i1 ++;      // i1 goes from 1st to last char  
+            i2 --;      // i2 goes from last to 1st char
+        }
+        for (int i = 0; i < str.size(); i ++) { 
+            ans += mp[ str[i] ];
+        }   
+        // re-constructing ans from str as per mapping
+        cout << ans << "\n";
+    }
+    return 0;
+}

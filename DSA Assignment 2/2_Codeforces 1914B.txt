@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    int t, n, k;
+    cin >> t;
+    
+    while (t--) {
+        cin >> n >> k;
+        vector <int> v(n);
+
+        for (int i = 0; i < n; i ++) {
+            v[i] = n - i;
+        }   // we initialise array with values from n to 1
+
+        reverse (v.end() - k - 1, v.end());
+        // reversing the last k + 1 part to satisfy condition
+
+        for (auto it : v)
+            cout << it << " ";
+        cout << "\n";
+    }
+    return 0;
+}

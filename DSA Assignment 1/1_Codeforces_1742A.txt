@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        
+        // checking condition as per question
+        // as any two numbers can add up to the 3rd numbers
+        if ((a + b == c) || (a + c == b) || (b + c == a))
+            cout << "YES\n";
+        else
+            cout << "NO\n";
+    }
+    return 0;
+}

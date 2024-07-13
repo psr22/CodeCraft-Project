@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int p1 = 0, ans = 0;
+        set <char> charset;     // stores unique chars, prevents duplicates
+
+        for (int p2 = 0; p2 < s.size(); p2 ++) {
+            while (charset.count (s[p2]) >= 1) {    // to ensure no repeating char
+                charset.erase (s[p1]);
+                p1 ++;
+            }
+            charset.insert (s[p2]);     
+            ans = max (ans, p2 - p1 + 1);       // check for max (ans, interval)
+        }
+        return ans;     // we check len for each unique substring and update 
+    }
+};

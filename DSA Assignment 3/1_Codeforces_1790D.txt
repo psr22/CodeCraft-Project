@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    int t, n, a;
+    cin >> t;
+
+    while (t--) {
+        cin >> n;
+        map <int, int> mp;
+        // stores numbers with their count
+
+        for (int i = 0; i < n; i ++) {
+            cin >> a;
+            mp[a] ++;
+        }
+        int ans = 0, prev[2] = {-1, 0};
+        // prev = {prev no, count}, NO initial prev no, so assign it -1
+
+        for (auto it : mp) {
+            if (prev[0] < it.first - 1)  
+                ans += it.second;       // new sets started
+            
+            // this is executed when prev no == curr no - 1
+            else        // we exclude already counted sets 
+                ans += max (0, it.second - prev[1]);
+            // as ans cannot decrease, min 0 is added
+
+            prev[0] = it.first;     // update prev values
+            prev[1] = it.second;
+        }  
+        cout << ans << "\n";
+    }
+    return 0;
+}

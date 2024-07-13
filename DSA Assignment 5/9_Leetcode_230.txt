@@ -1,0 +1,32 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int ans = 1e5, count = 0;   // global variables
+
+    void dfs (TreeNode* root, int k) {      // dfs / inorder traversal
+        if (root -> left && count < k)
+            dfs (root -> left, k);
+        
+        count ++;      // 'count' val signifies that index smallest element reached
+        if (count == k)     // kth smallest element is reached
+            ans = root -> val;
+
+        // count < k means kth smallest element not yet reached
+        if (root -> right && count < k)      
+            dfs (root -> right, k);        
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        dfs (root, k);      
+        return ans;
+    }
+};

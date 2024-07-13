@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    ll t, n, m, h, x;
+    cin >> t;
+
+    while (t--) {
+        cin >> n >> m >> h;
+        vector <vector <ll>> vv, res, rud;
+
+        for (ll i = 0; i < n; i ++) {
+            vector <ll> v;
+            for (ll j = 0; j < m; j ++) {
+                cin >> x;
+                v.push_back (x);    // stores tij val
+            }
+            vv.push_back (v);       // stores all tij val for person 
+        }
+        if (n == 1) {       // if only rudolf competes he is 1st 
+            cout << 1 << "\n";
+            continue;
+        }
+        for (auto vec : vv) {
+            sort (vec.begin (), vec.end ());    // sorting as per time
+
+            ll count = n, pen = 0, time = 0;
+            // here count stores no of REMAINING questions
+            
+            for (auto it : vec) {
+                time += it;     // total time spent by person in solving
+
+                if (time > h) 
+                    break;
+                pen += time;    // total penalty they have
+                count --;       // ques done, thus 1 less ques remaining
+            }
+            res.push_back ({ count, pen });
+            if (rud.size () == 0)
+                rud.push_back ({ count, pen });     // storing rudolf's data
+        }
+        sort (res.begin (), res.end ());
+        // sorting as per no of rem ques & then pen in increasing order
+        // hence this gives us the actual ranking
+
+        for (ll i = 0; i < n; i ++) {
+            if (res[i][0] == rud[0][0] && res[i][1] == rud[0][1]) {
+                cout << i + 1 << "\n";
+                break;      
+            }       
+        }   // rudolf's rank has higher pref in case of ties 
+    }
+    return 0;
+}

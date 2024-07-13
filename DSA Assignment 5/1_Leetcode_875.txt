@@ -1,0 +1,23 @@
+#define ll long long
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        sort (piles.begin(), piles.end());  
+
+        ll low = 1, high = *(-- piles.end()), n = piles.size();
+        // high is the max ele in vector, we Binary search for the ans
+
+        while (low <= high) {      
+            ll x = 0, mid = (low + high) / 2;
+            // update x val as per ques, add ceil (piles[i] / mid) for each i
+
+            for (ll i = 0; i < n; i ++) 
+                x += (piles[i] + mid - 1) / mid;    // same as ceil function      
+            if (x > h) 
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }   
+        return low;     // when loop ends, low stores min valid val of k
+    }   // at the end, high = low - 1
+};

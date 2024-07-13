@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        string s;
+        cin >> s;
+        int test = 0, n = s.size();
+
+        for (int i = 0; i < n - 1; i ++) {
+            string a = "", b = "";
+
+            for (int j = 0; j <= i; j ++)   
+                a += s[j];      // forming string a
+            for (int j = i + 1; j < n; j ++)   
+                b += s[j];      // forming string b
+
+            // checking if leading digit of int(b) != 0
+            // int value of b > int value of a
+            
+            if (b[0] != '0' && stoi(a) < stoi(b)) {
+                cout << a << " " << b;
+                test = 1;       
+                break;
+            }   
+        }    
+        if (test == 0)      // no a, b possible
+            cout << -1;    
+        cout << "\n";
+    }
+    return 0;
+}

@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSametree (TreeNode* root, TreeNode* subRoot) {
+        if (!root && !subRoot)      // if both are null, they are the same tree by definition
+            return true;
+        
+        if (root && subRoot && root -> val == subRoot -> val)       // if root nodes are equal 
+            return( isSametree (root -> left, subRoot -> left) 
+                && isSametree (root -> right, subRoot -> right) );
+
+        // check if left and right subtrees are same, else return false 
+        return false;       // also returns false if root nodes itself are unequal
+    }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if (!subRoot)   return true;        //  null tree is subtree of every tree 
+        if (!root)      return false;       //  null tree cannot have any tree as subtree
+
+        if (isSametree (root, subRoot))
+            return true;        // if both are same tree then subtree condition is true
+        // else check if subtree condition is true for left and right subtrees
+
+        return( isSubtree (root -> left, subRoot) 
+            || isSubtree (root -> right, subRoot) );
+    }
+};
